@@ -19,10 +19,17 @@
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "rules": {
+    "camelcase": "off",
+    "no-use-before-define": "off",
     "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "react/jsx-props-no-spreading": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/camelcase": "off",
     "import/prefer-default-export": "off",
     "import/extensions": [
       "error",
@@ -31,12 +38,7 @@
         "ts": "never",
         "tsx": "never"
       }
-    ],
-    "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
-    "react/react-in-jsx-scope": "off",
-    "camelcase": "off",
-    "@typescript-eslint/camelcase": "off"
+    ]
   },
   "settings": {
     "import/resolver": {
