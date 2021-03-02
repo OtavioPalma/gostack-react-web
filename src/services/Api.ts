@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const Api = axios.create({
-  baseURL: 'https://api.github.com',
+  baseURL: 'http://localhost:3333',
 });
