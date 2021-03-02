@@ -10,10 +10,16 @@ import { Input } from '../../components/Input/Input';
 import { getValidationErrors } from '../../utils/getValidationErrors';
 import { Background, Body, Container } from './styles';
 
+interface FormData {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export const SignUp: React.FC = () => {
   const ref = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async (data: any) => {
+  const handleSubmit = useCallback(async (data: FormData) => {
     try {
       ref.current?.setErrors({});
 
