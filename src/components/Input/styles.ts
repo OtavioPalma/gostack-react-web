@@ -1,19 +1,40 @@
 import { shade } from 'polished';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+  isFocused: boolean;
+  isFilled: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   background: #232129;
   border-radius: 10px;
-  border: 2px solid #232129;
   padding: 16px;
   width: 100%;
-
   display: flex;
   align-items: center;
+  cursor: text;
+  transition: all 0.2s;
+
+  border: 2px solid #232129;
+  color: #f4ede8;
 
   & + div {
     margin-top: 8px;
   }
+
+  ${props =>
+    props.isFocused &&
+    css`
+      color: #ff9000;
+      border-color: #ff9000;
+    `}
+
+  ${props =>
+    props.isFilled &&
+    css`
+      color: #ff9000;
+    `}
 
   input {
     flex: 1;
@@ -27,7 +48,6 @@ export const Container = styled.div`
   }
 
   svg {
-    color: ${shade(0.2, '#f4ede8')};
     margin-right: 16px;
   }
 `;

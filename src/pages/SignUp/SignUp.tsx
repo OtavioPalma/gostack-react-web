@@ -1,3 +1,4 @@
+import { Form } from '@unform/web';
 import React from 'react';
 import { FiArrowLeft, FiLock, FiMail, FiUser } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -7,6 +8,10 @@ import { Input } from '../../components/Input/Input';
 import { Background, Body, Container } from './styles';
 
 export const SignUp: React.FC = () => {
+  const handleSubmit = (data: any): void => {
+    console.log(data);
+  };
+
   return (
     <Container>
       <Background />
@@ -14,7 +19,7 @@ export const SignUp: React.FC = () => {
       <Body>
         <img src={logo} alt="GoBarber" />
 
-        <form>
+        <Form onSubmit={handleSubmit}>
           <h1>Crie sua conta</h1>
 
           <Input name="name" placeholder="Nome" type="text" icon={FiUser} />
@@ -29,7 +34,7 @@ export const SignUp: React.FC = () => {
           />
 
           <Button type="submit">Cadastrar</Button>
-        </form>
+        </Form>
 
         <Link to="signin">
           <FiArrowLeft size={26} />
