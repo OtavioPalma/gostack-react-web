@@ -1,4 +1,9 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { SignIn } from '../pages/SignIn/SignIn';
 
-export const Routes: React.FC = () => <Switch>Switch!</Switch>;
+export const Routes: React.FC = () => (
+  <Switch>
+    <Route path="/signin" component={SignIn} />
+  </Switch>
+);

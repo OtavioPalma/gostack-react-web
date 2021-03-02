@@ -9,17 +9,17 @@ export default createGlobalStyle`
   }
 
   body {
+    background: #312e38;
+    color: #fff;
     -webkit-font-smoothing: antialiased;
   }
 
   body, input, button {
-    font: 16px 'Roboto', sans-serif;
+    font: 16px 'Noto Sans JP', sans-serif;
   }
 
-  #root {
-    max-width: 970px;
-    margin: 0 auto;
-    padding: 40px 20px;
+  h1, h2, h3, h4, h5, h6, strong {
+    font-weight: 500;
   }
 
   button {
