@@ -5,6 +5,7 @@ import {
   FiInfo,
   FiXCircle,
 } from 'react-icons/fi';
+import { useTransition } from 'react-spring';
 import { useToast } from '../../hooks/useToast';
 import { ToastMessage } from '../../models/toast';
 import { Container, Message } from './styles';
@@ -22,23 +23,34 @@ const icons = {
 export const Toast: React.FC<ToastContainerProps> = ({ messages }) => {
   const { removeToast } = useToast();
 
+  const messagesWithTransitions = useTransition(
+    messages,
+    message => message.id,
+    {
+      from: { right: '-120%', opacity: 0 },
+      enter: { right: '0%', opacity: 1 },
+      leave: { right: '-120%', opacity: 0 },
+    },
+  );
+
   return (
     <Container>
-      {messages.map(message => (
+      {messagesWithTransitions.map(({ item, key, props }) => (
         <Message
-          key={message.id}
-          type={message.type}
-          description={Boolean(message.description)}
+          key={key}
+          type={item.type}
+          description={item.description}
+          style={props}
         >
-          {icons[message.type || 'info']}
+          {icons[item.type || 'info']}
 
           <div>
-            <strong>{message.title}</strong>
+            <strong>{item.title}</strong>
 
-            {message.description && <p>{message.description}</p>}
+            {item.description && <p>{item.description}</p>}
           </div>
 
-          <button type="button" onClick={() => removeToast(message.id)}>
+          <button type="button" onClick={() => removeToast(item.id)}>
             <FiXCircle size={18} />
           </button>
         </Message>

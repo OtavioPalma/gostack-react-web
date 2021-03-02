@@ -43,13 +43,13 @@ export const SignIn: React.FC = () => {
           const errors = getValidationErrors(err);
 
           ref.current?.setErrors(errors);
+        } else {
+          addToast({
+            title: 'Erro ao acessar conta',
+            description: 'Credenciais inválidas',
+            type: 'error',
+          });
         }
-
-        addToast({
-          title: 'Erro ao acessar conta',
-          description: 'Credenciais inválidas',
-          type: 'error',
-        });
       }
     },
     [signIn, addToast],
