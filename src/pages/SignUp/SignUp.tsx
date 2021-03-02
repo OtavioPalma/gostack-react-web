@@ -1,16 +1,37 @@
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { FiArrowLeft, FiLock, FiMail, FiUser } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
 import logo from '../../assets/logo.svg';
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
+import { getValidationErrors } from '../../utils/getValidationErrors';
 import { Background, Body, Container } from './styles';
 
 export const SignUp: React.FC = () => {
-  const handleSubmit = (data: any): void => {
-    console.log(data);
-  };
+  const ref = useRef<FormHandles>(null);
+
+  const handleSubmit = useCallback(async (data: any) => {
+    try {
+      ref.current?.setErrors({});
+
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Nome é obrigatório'),
+        email: Yup.string()
+          .required('E-mail é obrigatório')
+          .email('Digite um e-mail válido'),
+        password: Yup.string().min(6, 'Senha deve ter ao menos 6 dígitos'),
+      });
+
+      await schema.validate(data, { abortEarly: false });
+    } catch (err) {
+      const errors = getValidationErrors(err);
+
+      ref.current?.setErrors(errors);
+    }
+  }, []);
 
   return (
     <Container>
@@ -19,7 +40,7 @@ export const SignUp: React.FC = () => {
       <Body>
         <img src={logo} alt="GoBarber" />
 
-        <Form onSubmit={handleSubmit}>
+        <Form ref={ref} onSubmit={handleSubmit}>
           <h1>Crie sua conta</h1>
 
           <Input name="name" placeholder="Nome" type="text" icon={FiUser} />

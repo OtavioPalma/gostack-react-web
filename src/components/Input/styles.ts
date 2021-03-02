@@ -1,9 +1,11 @@
 import { shade } from 'polished';
 import styled, { css } from 'styled-components';
+import { Tooltip } from '../Tooltip/Tooltip';
 
 interface ContainerProps {
   isFocused: boolean;
   isFilled: boolean;
+  hasError: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -13,7 +15,6 @@ export const Container = styled.div<ContainerProps>`
   width: 100%;
   display: flex;
   align-items: center;
-  cursor: text;
   transition: all 0.2s;
 
   border: 2px solid #232129;
@@ -22,6 +23,13 @@ export const Container = styled.div<ContainerProps>`
   & + div {
     margin-top: 8px;
   }
+
+  ${props =>
+    props.hasError &&
+    css`
+      color: #c53030;
+      border-color: #c53030;
+    `}
 
   ${props =>
     props.isFocused &&
@@ -49,5 +57,23 @@ export const Container = styled.div<ContainerProps>`
 
   svg {
     margin-right: 16px;
+  }
+`;
+
+export const Error = styled(Tooltip)`
+  height: 20px;
+  margin-left: 16px;
+
+  svg {
+    margin: 0;
+  }
+
+  span {
+    background: #c53030;
+    color: #f4ede8;
+
+    &::before {
+      border-color: #c53030 transparent;
+    }
   }
 `;

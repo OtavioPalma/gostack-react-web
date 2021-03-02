@@ -7,7 +7,8 @@ import React, {
   useState,
 } from 'react';
 import { IconType } from 'react-icons';
-import { Container } from './styles';
+import { FiAlertCircle } from 'react-icons/fi';
+import { Container, Error } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -16,8 +17,10 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input: React.FC<InputProps> = ({ icon: Icon, name, ...rest }) => {
   const { fieldName, defaultValue, error, registerField } = useField(name);
+
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
+
   const ref = useRef<HTMLInputElement>(null);
 
   const handleOnFocus = useCallback((): void => {
@@ -38,7 +41,12 @@ export const Input: React.FC<InputProps> = ({ icon: Icon, name, ...rest }) => {
   }, [fieldName, registerField]);
 
   return (
-    <Container isFilled={isFilled} isFocused={isFocused} onClick={handleFocus}>
+    <Container
+      hasError={Boolean(error)}
+      isFilled={isFilled}
+      isFocused={isFocused}
+      onClick={handleFocus}
+    >
       {Icon && <Icon size={20} />}
       <input
         onBlur={handleOnBlur}
@@ -47,6 +55,12 @@ export const Input: React.FC<InputProps> = ({ icon: Icon, name, ...rest }) => {
         ref={ref}
         {...rest}
       />
+
+      {error && (
+        <Error title={error}>
+          <FiAlertCircle size={20} />
+        </Error>
+      )}
     </Container>
   );
 };
