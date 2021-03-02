@@ -8,7 +8,7 @@ import logo from '../../assets/logo.svg';
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
 import { getValidationErrors } from '../../utils/getValidationErrors';
-import { Background, Body, Container } from './styles';
+import { Animation, Background, Body, Container } from './styles';
 
 interface FormData {
   name: string;
@@ -44,29 +44,36 @@ export const SignUp: React.FC = () => {
       <Background />
 
       <Body>
-        <img src={logo} alt="GoBarber" />
+        <Animation>
+          <img src={logo} alt="GoBarber" />
 
-        <Form ref={ref} onSubmit={handleSubmit}>
-          <h1>Crie sua conta</h1>
+          <Form ref={ref} onSubmit={handleSubmit}>
+            <h1>Crie sua conta</h1>
 
-          <Input name="name" placeholder="Nome" type="text" icon={FiUser} />
+            <Input name="name" placeholder="Nome" type="text" icon={FiUser} />
 
-          <Input name="email" placeholder="E-mail" type="text" icon={FiMail} />
+            <Input
+              name="email"
+              placeholder="E-mail"
+              type="text"
+              icon={FiMail}
+            />
 
-          <Input
-            name="password"
-            placeholder="Senha"
-            type="password"
-            icon={FiLock}
-          />
+            <Input
+              name="password"
+              placeholder="Senha"
+              type="password"
+              icon={FiLock}
+            />
 
-          <Button type="submit">Cadastrar</Button>
-        </Form>
+            <Button type="submit">Cadastrar</Button>
+          </Form>
 
-        <Link to="signin">
-          <FiArrowLeft size={26} />
-          Voltar para o Acesso
-        </Link>
+          <Link to="/">
+            <FiArrowLeft size={26} />
+            Voltar para o Acesso
+          </Link>
+        </Animation>
       </Body>
     </Container>
   );

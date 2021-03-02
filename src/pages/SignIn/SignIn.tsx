@@ -10,7 +10,7 @@ import { Input } from '../../components/Input/Input';
 import { useAuth } from '../../hooks/useAuth';
 import { useToast } from '../../hooks/useToast';
 import { getValidationErrors } from '../../utils/getValidationErrors';
-import { Background, Body, Container } from './styles';
+import { Animation, Background, Body, Container } from './styles';
 
 interface FormData {
   email: string;
@@ -43,13 +43,15 @@ export const SignIn: React.FC = () => {
           const errors = getValidationErrors(err);
 
           ref.current?.setErrors(errors);
-        } else {
-          addToast({
-            title: 'Erro ao acessar conta',
-            description: 'Credenciais inválidas',
-            type: 'error',
-          });
+
+          return;
         }
+
+        addToast({
+          title: 'Erro ao acessar conta',
+          description: 'Credenciais inválidas',
+          type: 'error',
+        });
       }
     },
     [signIn, addToast],
@@ -58,29 +60,36 @@ export const SignIn: React.FC = () => {
   return (
     <Container>
       <Body>
-        <img src={logo} alt="GoBarber" />
+        <Animation>
+          <img src={logo} alt="GoBarber" />
 
-        <Form ref={ref} onSubmit={handleSubmit}>
-          <h1>Entre com sua conta</h1>
+          <Form ref={ref} onSubmit={handleSubmit}>
+            <h1>Entre com sua conta</h1>
 
-          <Input name="email" placeholder="E-mail" type="text" icon={FiMail} />
+            <Input
+              name="email"
+              placeholder="E-mail"
+              type="text"
+              icon={FiMail}
+            />
 
-          <Input
-            name="password"
-            placeholder="Senha"
-            type="password"
-            icon={FiLock}
-          />
+            <Input
+              name="password"
+              placeholder="Senha"
+              type="password"
+              icon={FiLock}
+            />
 
-          <Button type="submit">Entrar</Button>
+            <Button type="submit">Entrar</Button>
 
-          <a href="forgot">Esqueci minha senha</a>
-        </Form>
+            <a href="forgot">Esqueci minha senha</a>
+          </Form>
 
-        <Link to="signup">
-          <FiLogIn size={26} />
-          Criar Conta
-        </Link>
+          <Link to="signup">
+            <FiLogIn size={26} />
+            Criar Conta
+          </Link>
+        </Animation>
       </Body>
 
       <Background />
