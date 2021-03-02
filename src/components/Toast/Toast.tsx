@@ -1,49 +1,48 @@
 import React from 'react';
-import { FiAlertCircle, FiXCircle } from 'react-icons/fi';
+import {
+  FiAlertCircle,
+  FiCheckCircle,
+  FiInfo,
+  FiXCircle,
+} from 'react-icons/fi';
+import { useToast } from '../../hooks/useToast';
+import { ToastMessage } from '../../models/toast';
 import { Container, Message } from './styles';
 
-export const Toast: React.FC = () => {
+interface ToastContainerProps {
+  messages: ToastMessage[];
+}
+
+const icons = {
+  info: <FiInfo size={24} />,
+  error: <FiAlertCircle size={24} />,
+  success: <FiCheckCircle size={24} />,
+};
+
+export const Toast: React.FC<ToastContainerProps> = ({ messages }) => {
+  const { removeToast } = useToast();
+
   return (
     <Container>
-      <Message type="info" description>
-        <FiAlertCircle size={20} />
+      {messages.map(message => (
+        <Message
+          key={message.id}
+          type={message.type}
+          description={Boolean(message.description)}
+        >
+          {icons[message.type || 'info']}
 
-        <div>
-          <strong>Erro!</strong>
+          <div>
+            <strong>{message.title}</strong>
 
-          <p>Não foi possível fazer login</p>
-        </div>
+            {message.description && <p>{message.description}</p>}
+          </div>
 
-        <button type="button">
-          <FiXCircle size={18} />
-        </button>
-      </Message>
-
-      <Message type="success" description>
-        <FiAlertCircle size={20} />
-
-        <div>
-          <strong>Erro!</strong>
-        </div>
-
-        <button type="button">
-          <FiXCircle size={18} />
-        </button>
-      </Message>
-
-      <Message type="error" description={false}>
-        <FiAlertCircle size={20} />
-
-        <div>
-          <strong>Erro!</strong>
-
-          <p>Não foi possível fazer login</p>
-        </div>
-
-        <button type="button">
-          <FiXCircle size={18} />
-        </button>
-      </Message>
+          <button type="button" onClick={() => removeToast(message.id)}>
+            <FiXCircle size={18} />
+          </button>
+        </Message>
+      ))}
     </Container>
   );
 };

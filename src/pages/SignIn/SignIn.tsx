@@ -18,8 +18,8 @@ interface FormData {
 }
 
 export const SignIn: React.FC = () => {
-  const { user, signIn } = useAuth();
-  const { addToast, removeToast } = useToast();
+  const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const ref = useRef<FormHandles>(null);
 
@@ -45,7 +45,11 @@ export const SignIn: React.FC = () => {
           ref.current?.setErrors(errors);
         }
 
-        addToast();
+        addToast({
+          title: 'Erro ao acessar conta',
+          description: 'Credenciais inválidas',
+          type: 'error',
+        });
       }
     },
     [signIn, addToast],
