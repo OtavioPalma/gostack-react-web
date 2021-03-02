@@ -25,4 +25,19 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  /* Chrome auto fill override */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active  {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color:  #fff !important;
+  font: 16px 'Noto Sans JP', sans-serif;
+  }
+
+  input:-webkit-autofill::first-line {
+    font: 16px 'Noto Sans JP', sans-serif;
+
+  }
 `;
