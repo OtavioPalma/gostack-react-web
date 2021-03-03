@@ -18,10 +18,10 @@ interface FormData {
 }
 
 export const SignIn: React.FC = () => {
+  const ref = useRef<FormHandles>(null);
+
   const { signIn } = useAuth();
   const { addToast } = useToast();
-
-  const ref = useRef<FormHandles>(null);
 
   const handleSubmit = useCallback(
     async (data: FormData) => {
