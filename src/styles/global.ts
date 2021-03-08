@@ -38,6 +38,20 @@ export default createGlobalStyle`
 
   input:-webkit-autofill::first-line {
     font: 16px 'Noto Sans JP', sans-serif;
+  }
 
+  /* custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 2px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #999591;
+    border-radius: 16px;
   }
 `;
