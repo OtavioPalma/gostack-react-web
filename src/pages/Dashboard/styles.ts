@@ -1,3 +1,4 @@
+import { shade } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.div``;
@@ -211,4 +212,53 @@ export const Appointment = styled.div`
 
 export const Calendar = styled.aside`
   width: 380px;
+
+  .DayPicker {
+    width: 100%;
+    background: #28262e;
+    border-radius: 10px;
+
+    &-wrapper {
+      padding-bottom: 0;
+    }
+
+    &-Day {
+      width: 40px;
+      height: 40px;
+
+      &.DayPicker-Day--disabled {
+        color: #666360 !important;
+        background: transparent !important;
+      }
+
+      &--selected {
+        background: #ff9000 !important;
+        border-radius: 10px;
+        color: #232129 !important;
+        font-weight: 500;
+      }
+
+      &--today {
+        font-weight: normal;
+      }
+
+      &--available:not(.DayPicker-Day--outside) {
+        background: #3e3b47;
+        border-radius: 10px;
+        color: #fff;
+      }
+    }
+
+    &-Month {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 8px;
+      margin: 16px;
+    }
+  }
+
+  .DayPicker:not(.DayPicker--interactionDisabled)
+    .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+    background: ${shade(0.2, '#3e3b47')};
+  }
 `;
