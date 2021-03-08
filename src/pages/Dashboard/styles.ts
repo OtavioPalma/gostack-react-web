@@ -3,6 +3,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div``;
 
+export const LoadingContainer = styled.div`
+  height: calc(100vh - 144px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Header = styled.header`
   padding: 32px 0;
   background: #28262e;
@@ -161,6 +168,10 @@ export const Section = styled.section`
     display: block;
     padding-bottom: 16px;
     margin-bottom: 16px;
+  }
+
+  > p {
+    color: #999591;
   }
 `;
 
