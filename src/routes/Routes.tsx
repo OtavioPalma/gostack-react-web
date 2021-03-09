@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import { Dashboard } from '../pages/Dashboard/Dashboard';
 import { ForgotPassword } from '../pages/ForgotPassword/ForgotPassword';
+import { Profile } from '../pages/Profile/Profile';
 import { ResetPassword } from '../pages/ResetPassword/ResetPassword';
 import { SignIn } from '../pages/SignIn/SignIn';
 import { SignUp } from '../pages/SignUp/SignUp';
@@ -17,6 +18,7 @@ export const Routes: React.FC = () => {
         <Route path="/reset-password/:token" component={ResetPassword} />
 
         <Route path="/dashboard" component={Dashboard} isPrivate />
+        <Route path="/profile" component={Profile} isPrivate />
       </Switch>
     </>
   );

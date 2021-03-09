@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useState } from 'react';
-import { AuthContextData, AuthState } from '../models/auth';
+import { AuthContextData, AuthState, User } from '../models/auth';
 import { Api } from '../services/Api';
 
 export const AuthContext = createContext<AuthContextData>(
@@ -42,8 +42,16 @@ export const AuthProvider: React.FC = ({ children }) => {
     localStorage.removeItem('@GoBarber:user');
   }, []);
 
+  const updateUser = useCallback((user: User) => {
+    setData(state => ({ token: state.token, user }));
+
+    localStorage.setItem('@GoBarber:user', JSON.stringify(user));
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user: data.user, signIn, signOut, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
